@@ -44,21 +44,21 @@ App.Components.UserInfoField = Ext.extend(Ext.form.TriggerField, {
                     items: [
                         {
                             xtype: 'textfield',
-                            fieldLabel: 'Name',
-                            name: 'name',
-                            listeners: {
-                                afterrender: function () {
-                                    this.setValue(fieldValueObj.name)
-                                }
-                            }
-                        },
-                        {
-                            xtype: 'textfield',
                             fieldLabel: 'Surname',
                             name: 'surname',
                             listeners: {
                                 afterrender: function () {
                                     this.setValue(fieldValueObj.surname)
+                                }
+                            }
+                        },
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: 'Name',
+                            name: 'name',
+                            listeners: {
+                                afterrender: function () {
+                                    this.setValue(fieldValueObj.name)
                                 }
                             }
                         },
@@ -86,10 +86,10 @@ App.Components.UserInfoField = Ext.extend(Ext.form.TriggerField, {
                         {
                             xtype: 'radiogroup',
                             fieldLabel: 'Sex',
-                            name: 'cb-group',
+                            name: 'sex',
                             items: [
-                                {boxLabel: 'M', name: 'cb-group', inputValue: 'M'},
-                                {boxLabel: 'F', name: 'cb-group', inputValue: 'F'}
+                                {boxLabel: 'M', name: 'sex', inputValue: 'M'},
+                                {boxLabel: 'F', name: 'sex', inputValue: 'F'}
                             ],
                             listeners: {
                                 /**
@@ -116,9 +116,12 @@ App.Components.UserInfoField = Ext.extend(Ext.form.TriggerField, {
                             scope: this,
                             handler: function () {
                                 var formPanel = userWin.getComponent('myForm');
-                                var values = formPanel.getForm().getValues();
-                                console.log(values);
+                                var formValuesObj = formPanel.getForm().getValues();
+                                console.log(formValuesObj);
+                                var formValuesStr = JSON.stringify(formValuesObj);
+                                console.log(formValuesStr);
                                 userWin.close();
+                                this.setValue(formValuesStr);
 
                             }
                         },
